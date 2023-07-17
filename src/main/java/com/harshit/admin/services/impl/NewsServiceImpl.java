@@ -5,6 +5,9 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.harshit.admin.entities.News;
@@ -42,9 +45,13 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
-	public List<NewsDto> getAllNews() {
-		List<News> news = newsRepository.findAll();
-		List<NewsDto> newsDtos = news.stream().map((post)->modelMapper.map(post, NewsDto.class)).collect(Collectors.toList());
+	public List<NewsDto> getAllNews(Integer pageNumber, Integer pageSize) {
+		
+		Pageable p = PageRequest.of(pageNumber, pageSize);
+		Page<News> pageNews = newsRepository.findAll(p);
+		List<News> allNews = pageNews.getContent();
+		
+		List<NewsDto> newsDtos = allNews.stream().map((post)->modelMapper.map(post, NewsDto.class)).collect(Collectors.toList());
 		return newsDtos;
 	}
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.harshit.admin.payloads.NewsDto;
@@ -37,8 +38,11 @@ public class NewsController {
 	}
 	
 	@GetMapping("/news")
-	public ResponseEntity<List<NewsDto>> getAllPosts(){
-		List<NewsDto> newsDtos = newsService.getAllNews();
+	public ResponseEntity<List<NewsDto>> getAllPosts(
+			@RequestParam(value="pageNumber", defaultValue = "1", required = false) Integer pageInteger,
+			@RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize
+			) {
+		List<NewsDto> newsDtos = newsService.getAllNews(pageInteger, pageSize);
 		return new ResponseEntity<List<NewsDto>>(newsDtos, HttpStatus.OK);
 	}
 }
