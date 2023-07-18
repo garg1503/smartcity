@@ -3,6 +3,7 @@ package com.harshit.admin.controllers;
 import java.util.List;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class NewsController {
 	
 	@GetMapping("/news")
 	public ResponseEntity<List<NewsDto>> getAllPosts(
-			@RequestParam(value="pageNumber", defaultValue = "1", required = false) Integer pageInteger,
+			@RequestParam(value="pageNumber", defaultValue = "0", required = false) Integer pageInteger,
 			@RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize
 			) {
 		List<NewsDto> newsDtos = newsService.getAllNews(pageInteger, pageSize);
