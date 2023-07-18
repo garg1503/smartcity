@@ -11,5 +11,7 @@ public interface NewsService {
 	NewsDto getSingleNews(Integer newsId);
 	
 	List<NewsDto> getAllNews(Integer pageNumber, Integer pageSize);
+	
+	List<NewsDto> getAllNewsforHeadlines();
 
 }

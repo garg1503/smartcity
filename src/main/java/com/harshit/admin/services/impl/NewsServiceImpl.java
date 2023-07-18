@@ -55,6 +55,13 @@ public class NewsServiceImpl implements NewsService {
 		return newsDtos;
 	}
 
+	@Override
+	public List<NewsDto> getAllNewsforHeadlines() {
+		List<News> allNews = newsRepository.findAll();
+		List<NewsDto> newsDtos = allNews.stream().map((news) -> modelMapper.map(news, NewsDto.class)).collect(Collectors.toList());
+		return newsDtos;
+	}
+
 	
 
 	

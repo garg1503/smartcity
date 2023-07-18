@@ -19,7 +19,7 @@ import com.harshit.admin.services.NewsService;
 
 
 @RestController
-@RequestMapping("/home/")
+@RequestMapping("/api/")
 public class NewsController {
 	
 	@Autowired
